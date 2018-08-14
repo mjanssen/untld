@@ -50,7 +50,7 @@ untld({
 
 # Demo
 
-// Coming soon
+Code demo [can be found here](https://codesandbox.io/s/6w3wxz73vw)
 
 # License
 
