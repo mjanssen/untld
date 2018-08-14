@@ -16,7 +16,7 @@ function parse(urlParts) {
 
   return {
     protocol: urlParts[1],
-    second: noTld.join('.'),
+    domain: noTld.join('.'),
     tld,
   };
 }
