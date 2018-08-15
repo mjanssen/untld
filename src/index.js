@@ -22,6 +22,7 @@ function parse(urlParts) {
 }
 
 function esketit(domain) {
+  if (typeof window === 'undefined') return null;
   let origin = window.location.origin;
   if (typeof domain === 'object') {
     origin = typeof domain.domain !== 'undefined' ? domain.domain : origin;
