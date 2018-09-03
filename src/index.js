@@ -22,12 +22,9 @@ function parse(urlParts) {
 }
 
 function esketit(domain) {
-  if (typeof window === 'undefined') return null;
-  let origin = window.location.origin;
-  if (typeof domain === 'object') {
-    origin = typeof domain.domain !== 'undefined' ? domain.domain : origin;
-    secondLevelTlds = secondLevelTlds.concat(domain.customTlds);
-  }
+  if (typeof window === 'undefined' && typeof domain.domain === 'undefined') return null;
+  const origin = typeof domain.domain !== 'undefined' ? domain.domain : window.location.origin;
+  secondLevelTlds = secondLevelTlds.concat(domain.customTlds || []);
   const urlParts = origin.match(urlRegex);
   return parse(urlParts);
 }
