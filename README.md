@@ -22,22 +22,24 @@ untld();
   protocol: 'https://',
   domain: 'github',
   tld: 'com',
+  path: '/mjanssen',
 }
 
 // Get information about any other domain
 untld({
-  domain: 'https://some.domain.co.uk/esketit',
+  domain: 'https://some.domain.co.uk/this-is-the/path',
 });
 
 {
   protocol: 'https://',
   domain: 'some.domain',
   tld: 'co.uk',
+  path: '/this-is-the/path',
 }
 
 // If you have to support other special double tlds
 untld({
-  domain: 'https://some.other.domain.in.ua/esketit',
+  domain: 'https://some.other.domain.in.ua/this-is-the/path',
   customTlds: ['in.ua'],
 });
 
@@ -45,6 +47,7 @@ untld({
   protocol: 'https://',
   domain: 'some.other.domain',
   tld: 'in.ua',
+  path: '/this-is-the/path'
 }
 ```
 
