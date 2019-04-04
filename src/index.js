@@ -7,21 +7,22 @@ function checkForSecondLevelTld(url) {
 }
 
 function parse(urlParts) {
+  const path = urlParts[5];
   const url = urlParts[3];
   const secondTld = checkForSecondLevelTld(url);
   const splittedUrl = url.split('.');
   const tld = secondTld ? secondTld : splittedUrl[splittedUrl.length - 1];
-  const splittedTld = tld.split('.');
   const noTld = splittedUrl.filter(part => tld.indexOf(part) === -1);
 
   return {
     protocol: urlParts[1],
     domain: noTld.join('.'),
     tld,
+    path,
   };
 }
 
-function esketit(domain) {
+function untld(domain) {
   if (typeof window === 'undefined' && typeof domain.domain === 'undefined') return null;
   const origin = typeof domain.domain !== 'undefined' ? domain.domain : window.location.origin;
   secondLevelTlds = secondLevelTlds.concat(domain.customTlds || []);
@@ -29,4 +30,4 @@ function esketit(domain) {
   return parse(urlParts);
 }
 
-export default esketit;
+export default untld;
