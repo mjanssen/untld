@@ -7,18 +7,18 @@ function checkForSecondLevelTld(url) {
 }
 
 function parse(urlParts) {
-  const path = urlParts[5];
+  const [path] = urlParts[5].split('?');
   const url = urlParts[3];
   const secondTld = checkForSecondLevelTld(url);
   const splittedUrl = url.split('.');
   const tld = secondTld ? secondTld : splittedUrl[splittedUrl.length - 1];
   const noTld = splittedUrl.filter(part => tld.indexOf(part) === -1);
-  const querySplit = path.split('?');
+  const querySplit = urlParts[5].split('?');
   const query = {};
   if (querySplit.length > 0) {
     querySplit[querySplit.length - 1].split('&').forEach(q => {
       const [p, v] = q.split('=');
-      query[p] = v;
+      if (p !== '/' && v) query[p] = v;
     });
   }
 
@@ -33,7 +33,7 @@ function parse(urlParts) {
 
 function untld(domain = {}) {
   if (typeof window === 'undefined' && typeof domain.domain === 'undefined') return null;
-  const origin = typeof domain.domain !== 'undefined' ? domain.domain : window.location.origin;
+  const origin = typeof domain.domain !== 'undefined' ? domain.domain : window.location.href;
   secondLevelTlds = secondLevelTlds.concat(domain.customTlds || []);
   const urlParts = origin.match(urlRegex);
   return parse(urlParts);
