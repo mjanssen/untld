@@ -13,17 +13,26 @@ function parse(urlParts) {
   const splittedUrl = url.split('.');
   const tld = secondTld ? secondTld : splittedUrl[splittedUrl.length - 1];
   const noTld = splittedUrl.filter(part => tld.indexOf(part) === -1);
+  const querySplit = path.split('?');
+  const query = {};
+  if (querySplit.length > 0) {
+    querySplit[querySplit.length - 1].split('&').forEach(q => {
+      const [p, v] = q.split('=');
+      query[p] = v;
+    });
+  }
 
   return {
     protocol: urlParts[1],
     domain: noTld.join('.'),
     tld,
     path,
+    query,
   };
 }
 
 function untld(domain) {
-  if (typeof window === 'undefined' && typeof domain.domain === 'undefined') return null;
+  if (typeof window === 'undefined' && typeof domain === 'undefined' && typeof domain.domain === 'undefined') return null;
   const origin = typeof domain.domain !== 'undefined' ? domain.domain : window.location.origin;
   secondLevelTlds = secondLevelTlds.concat(domain.customTlds || []);
   const urlParts = origin.match(urlRegex);

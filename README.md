@@ -1,6 +1,6 @@
 # Untld 👾
 
-The **zero-dependency** ~_340B_ TLD manager for your Javascript projects.
+The **zero-dependency** ~_400B_ TLD manager for your Javascript projects.
 
 # Install
 
@@ -23,11 +23,12 @@ untld();
   domain: 'github',
   tld: 'com',
   path: '/mjanssen',
+  query: {},
 }
 
 // Get information about any other domain
 untld({
-  domain: 'https://some.domain.co.uk/this-is-the/path',
+  domain: 'https://some.domain.co.uk/this-is-the/path?q=something-here',
 });
 
 {
@@ -35,6 +36,7 @@ untld({
   domain: 'some.domain',
   tld: 'co.uk',
   path: '/this-is-the/path',
+  query: { q: 'something-here' },
 }
 
 // If you have to support other special double tlds
@@ -47,7 +49,8 @@ untld({
   protocol: 'https://',
   domain: 'some.other.domain',
   tld: 'in.ua',
-  path: '/this-is-the/path'
+  path: '/this-is-the/path',
+  query: {},
 }
 ```
 
