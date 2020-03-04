@@ -31,9 +31,9 @@ function parse(urlParts) {
   };
 }
 
-function untld(domain = false) {
-  if (typeof window === 'undefined' && domain === false) return null;
-  const origin = domain && typeof domain.domain !== 'undefined' ? domain.domain : window.location.origin;
+function untld(domain = {}) {
+  if (typeof window === 'undefined' && typeof domain.domain === 'undefined') return null;
+  const origin = typeof domain.domain !== 'undefined' ? domain.domain : window.location.origin;
   secondLevelTlds = secondLevelTlds.concat(domain.customTlds || []);
   const urlParts = origin.match(urlRegex);
   return parse(urlParts);

@@ -1,6 +1,6 @@
 {
   "name": "untld",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "The only TLD manager you need for your JS applications. For 340 bytes.",
   "main": "./dist/untld.js",
   "scripts": {
