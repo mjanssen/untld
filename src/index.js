@@ -7,13 +7,14 @@ function checkForSecondLevelTld(url) {
 }
 
 function parse(urlParts) {
-  const [path] = urlParts[5].split('?');
+  const pathname = urlParts[5] || ''
+  const [path] = pathname.split('?');
   const url = urlParts[3];
   const secondTld = checkForSecondLevelTld(url);
   const splittedUrl = url.split('.');
   const tld = secondTld ? secondTld : splittedUrl[splittedUrl.length - 1];
   const noTld = splittedUrl.filter(part => tld.indexOf(part) === -1);
-  const querySplit = urlParts[5].split('?');
+  const querySplit = pathname.split('?');
   const query = {};
   if (querySplit.length > 0) {
     querySplit[querySplit.length - 1].split('&').forEach(q => {
